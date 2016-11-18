@@ -24,16 +24,15 @@ public class Gps {
      * 
      */
     
-    public static String gprmc;
-    
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         SerialPort serial= new SerialPort();
         Interfaz it;
         Home h;
-        h=new Home();
-        h.setVisible(true);
-        gprmc="$GPRMC,194509.000,A,4042.6142,N,07400.4168,W,2.03,221.11,160412,,,A*77";
+        Controlador Control=new Controlador();
+        //h=new Home();
+        //h.setVisible(true);
+        
         //it=new Interfaz();
         //it.setVisible(true);
         /*
