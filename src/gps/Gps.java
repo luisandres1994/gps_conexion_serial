@@ -33,7 +33,7 @@ public class Gps {
         Home h;
         h=new Home();
         h.setVisible(true);
-        gprmc="hola";
+        gprmc="$GPRMC,194509.000,A,4042.6142,N,07400.4168,W,2.03,221.11,160412,,,A*77";
         //it=new Interfaz();
         //it.setVisible(true);
         /*
