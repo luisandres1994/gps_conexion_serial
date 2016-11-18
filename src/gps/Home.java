@@ -17,6 +17,7 @@ public class Home extends javax.swing.JFrame {
     
     private javax.swing.JLabel fondo;
     
+    private Interfaz it;
     public Home() {
         fondo  = new javax.swing.JLabel();
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo.png")));
@@ -50,6 +51,11 @@ public class Home extends javax.swing.JFrame {
 
         Iniciar.setText("Iniciar");
         Iniciar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Iniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,6 +80,12 @@ public class Home extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarActionPerformed
+            it = new Interfaz();
+            it.setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_IniciarActionPerformed
 
     /**
      * @param args the command line arguments

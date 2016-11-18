@@ -129,7 +129,8 @@ public class Interfaz extends javax.swing.JFrame {
         data = Gps.gprmc;
         parceo=data.split(",");
         String Hora="";
-        Hora+=parceo[1].charAt(0)+parceo[1].charAt(1);
+        Hora+=parceo[1].charAt(0);
+        Hora+=parceo[1].charAt(1);
         String minutos="";
         String Segundos="";
         jTextField2.setText(Hora);
