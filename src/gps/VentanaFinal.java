@@ -6,6 +6,7 @@
 package gps;
 
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.geom.Point2D;
@@ -31,6 +32,8 @@ public class VentanaFinal extends javax.swing.JFrame {
     private StaticMaps Map;
     private Controlador C;
     private int escala,zoom;
+    private StatusBar bar;
+    
     public VentanaFinal(Controlador Ct) {
         C=Ct;
         imagen=null;
@@ -38,8 +41,25 @@ public class VentanaFinal extends javax.swing.JFrame {
         zoom=12;
         Map= new StaticMaps();
         initComponents();
+        capturareventos();
         this.setVisible(true);
         
+    }
+    
+    private void capturareventos()
+    {
+        bar = new StatusBar(this.jPanel5);
+        this.recorrerComponentes(jPanel1.getComponents());
+        this.recorrerComponentes(jTabbedPane1.getComponents());
+        this.recorrerComponentes(jPanel2.getComponents());
+        this.recorrerComponentes(jPanel3.getComponents());
+        this.recorrerComponentes(jPanel4.getComponents());
+    }
+    
+    private void recorrerComponentes(Component[] componentes){
+        for(int i=0; i<componentes.length;i++){ 
+            componentes[i].addMouseListener(bar);
+        }
     }
     
     private StaticMaps.Format seleccionarFormato(){
@@ -135,6 +155,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         Elevacion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         resolucion = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Explo GPS");
@@ -142,13 +163,12 @@ public class VentanaFinal extends javax.swing.JFrame {
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
-            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,10 +178,12 @@ public class VentanaFinal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Informacion general", jPanel2);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -171,10 +193,12 @@ public class VentanaFinal extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Satelites", jPanel3);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jScrollPane1.setMaximumSize(new java.awt.Dimension(420, 414));
 
@@ -315,7 +339,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                             .addComponent(Elevacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(resolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,6 +374,7 @@ public class VentanaFinal extends javax.swing.JFrame {
 
         jScrollPane1.getAccessibleContext().setAccessibleDescription("");
         EscalaSlider.getAccessibleContext().setAccessibleName("EscalaSlider");
+        ZoomSlider.getAccessibleContext().setAccessibleName("ZoomSlider");
         ZoomText.getAccessibleContext().setAccessibleName("ZoomText");
         Formato.getAccessibleContext().setAccessibleName("Formato");
         TypeMapa.getAccessibleContext().setAccessibleName("TypeMapa");
@@ -359,6 +384,8 @@ public class VentanaFinal extends javax.swing.JFrame {
         resolucion.getAccessibleContext().setAccessibleName("resolucion");
 
         jTabbedPane1.addTab("Mapa localizacion", jPanel4);
+        jPanel4.getAccessibleContext().setAccessibleName("MapaLocalizacion");
+        jPanel4.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -371,17 +398,33 @@ public class VentanaFinal extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
         );
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel5.setFocusable(false);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 34, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -410,11 +453,6 @@ public class VentanaFinal extends javax.swing.JFrame {
         cargarmapa();
     }//GEN-LAST:event_MapaRecargarActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-        C.Matarhilo();
-    }//GEN-LAST:event_formWindowClosed
-
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -442,6 +480,7 @@ public class VentanaFinal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
