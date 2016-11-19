@@ -30,6 +30,8 @@ public class Gps {
         Interfaz it;
         Home h;
         Controlador Control=new Controlador();
+        //VentanaFinal V;
+        //V = new VentanaFinal();
         //h=new Home();
         //h.setVisible(true);
         
