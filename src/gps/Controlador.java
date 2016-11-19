@@ -10,6 +10,7 @@ import giovynet.nativelink.SerialPort;
 import giovynet.serial.Baud;
 import giovynet.serial.Com;
 import giovynet.serial.Parameters;
+import java.io.IOException;
 import java.util.List;
 /**
  *
@@ -27,10 +28,12 @@ public class Controlador {
     private Home Principal;
     private Conexion con;
     public String gprmc;
-    
-    public Controlador() {
+    private Read_GPS RG;
+    public Controlador() throws IOException {
         serial = new SerialPort();
         gprmc="$GPRMC,194509.000,A,4042.6142,N,07400.4168,W,2.03,221.11,160412,,,A*77";
+        RG = new Read_GPS(this);
+        RG.start();
         Principal = new Home(this);
         Principal.setVisible(true);
         
