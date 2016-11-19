@@ -27,26 +27,77 @@ public class VentanaFinal extends javax.swing.JFrame {
         System.err.println("Algo ocurrió, no se pudo ejecutar la función: " + funcionError);
     }
     
-    
-    
-    public VentanaFinal() {
+    private Image imagen;
+    private StaticMaps Map;
+    private Controlador C;
+    private int escala,zoom;
+    public VentanaFinal(Controlador Ct) {
+        C=Ct;
+        imagen=null;
+        escala=1;
+        zoom=12;
+        Map= new StaticMaps();
         initComponents();
         this.setVisible(true);
-        Image resultadoMapa=null;
-        StaticMaps ObjStatMap=new StaticMaps();
-        try {
-            resultadoMapa=ObjStatMap.getStaticMap("10.287013,-66.356965", 11,new Dimension(600,600),
-                    1, StaticMaps.Format.png, StaticMaps.Maptype.terrain);
-        } catch (Exception e) {
-            error("Mapas estáticos");
-        }
         
-        ImageIcon imgIcon=new ImageIcon(resultadoMapa);
+    }
+    
+    private StaticMaps.Format seleccionarFormato(){
+        StaticMaps.Format formato= StaticMaps.Format.png;
+        switch(Formato.getSelectedItem().toString()){
+            case "png":
+                formato= StaticMaps.Format.png;
+                break;
+            case "png32":
+                formato= StaticMaps.Format.png32;
+                break;
+            case "gif":
+                formato= StaticMaps.Format.gif;
+                break;
+            case "jpg":
+                formato= StaticMaps.Format.jpg;
+                break;
+            case "jpg_baseline":
+                formato= StaticMaps.Format.jpg_baseline;
+                break;
+        }
+        return formato;
+    }
+    
+    private StaticMaps.Maptype seleccionarTipoMapa(){
+        StaticMaps.Maptype tipoMapa= StaticMaps.Maptype.roadmap;
+        switch(TypeMapa.getSelectedItem().toString()){
+            case "roadmap":
+                tipoMapa= StaticMaps.Maptype.roadmap;
+                break;
+            case "satellite":
+                tipoMapa= StaticMaps.Maptype.satellite;
+                break;
+            case "hybrid":
+                tipoMapa= StaticMaps.Maptype.hybrid;
+                break;
+            case "terrain":
+                tipoMapa= StaticMaps.Maptype.terrain;
+                break;
+        }
+        return tipoMapa;
+    }
+    
+    public void cargarmapa()
+    {
+        
+        try {
+        C.codificar();
+        imagen= Map.getStaticMap(C.get_latitud()+","+C.get_longitud(), zoom, new Dimension (600,600),escala,
+                this.seleccionarFormato(), this.seleccionarTipoMapa());
+        
+        }catch(Exception e){}
+        Mapa_Google.setText(null);
+        ImageIcon imgIcon=new ImageIcon(imagen);
         Icon iconImage=(Icon)imgIcon;
         Mapa_Google.setText(null);
         Mapa_Google.setIcon(iconImage);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,7 +107,6 @@ public class VentanaFinal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -86,13 +136,15 @@ public class VentanaFinal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         resolucion = new javax.swing.JTextField();
 
-        jTextField1.setText("jTextField1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Explo GPS");
         setAlwaysOnTop(true);
+        setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -124,6 +176,8 @@ public class VentanaFinal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Satelites", jPanel3);
 
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(420, 414));
+
         Mapa_Google.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Mapa_Google.setText("Mapa estatico");
         jScrollPane1.setViewportView(Mapa_Google);
@@ -142,6 +196,8 @@ public class VentanaFinal extends javax.swing.JFrame {
             }
         });
 
+        EscalaText.setEditable(false);
+        EscalaText.setBackground(new java.awt.Color(255, 255, 255));
         EscalaText.setText("1");
 
         Jlabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -156,6 +212,8 @@ public class VentanaFinal extends javax.swing.JFrame {
             }
         });
 
+        ZoomText.setEditable(false);
+        ZoomText.setBackground(new java.awt.Color(255, 255, 255));
         ZoomText.setText("12");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -199,7 +257,7 @@ public class VentanaFinal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
                     .addComponent(jLabel5)
                     .addComponent(Postal)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -290,6 +348,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jScrollPane1.getAccessibleContext().setAccessibleDescription("");
         EscalaSlider.getAccessibleContext().setAccessibleName("EscalaSlider");
         ZoomText.getAccessibleContext().setAccessibleName("ZoomText");
         Formato.getAccessibleContext().setAccessibleName("Formato");
@@ -325,7 +384,10 @@ public class VentanaFinal extends javax.swing.JFrame {
                 .addGap(0, 28, Short.MAX_VALUE))
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -334,50 +396,26 @@ public class VentanaFinal extends javax.swing.JFrame {
 
     private void EscalaSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_EscalaSliderStateChanged
         // TODO add your handling code here:
+        escala = EscalaSlider.getValue();
+        EscalaText.setText(String.valueOf(escala));
     }//GEN-LAST:event_EscalaSliderStateChanged
 
     private void ZoomSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZoomSliderStateChanged
         // TODO add your handling code here:
+        zoom = ZoomSlider.getValue();
+        ZoomText.setText(String.valueOf(zoom));
     }//GEN-LAST:event_ZoomSliderStateChanged
 
     private void MapaRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MapaRecargarActionPerformed
-        // TODO add your handling code here:
+        cargarmapa();
     }//GEN-LAST:event_MapaRecargarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        C.Matarhilo();
+    }//GEN-LAST:event_formWindowClosed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaFinal().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DireccionText;
@@ -407,7 +445,6 @@ public class VentanaFinal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField resolucion;
     // End of variables declaration//GEN-END:variables
 }
