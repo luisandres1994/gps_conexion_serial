@@ -128,10 +128,12 @@ public class Conexion extends javax.swing.JFrame {
 
     private void bt_conectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_conectActionPerformed
         // TODO add your handling code here:
-        it= new Interfaz(C);
+        //it= new Interfaz(C);
+        C.VF = new VentanaFinal(this.C);
         h.setVisible(false);
         this.setVisible(false);
-        it.setVisible(true);
+        //it.setVisible(true);
+        C.VF.setVisible(true);
     }//GEN-LAST:event_bt_conectActionPerformed
 
     

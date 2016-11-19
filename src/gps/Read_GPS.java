@@ -49,11 +49,12 @@ public class Read_GPS extends Thread{
             while(!cola.isEmpty())
             {
                 
+                
                 aux=(String) cola.peekLast();
                 if(aux.charAt(5)=='C')
                 {
                     C.gprmc=aux;
-                    
+                    Thread.sleep(5000);
                 }
                 cola.removeLast();
                 cola.addFirst(aux);
