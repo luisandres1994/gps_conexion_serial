@@ -33,7 +33,6 @@ public class Conexion extends javax.swing.JFrame {
                 for(String free: puertos)
                 {
                     lista.addElement(free);
-                    System.out.println(free);
                 }
                 Boxpuertos.setModel(lista);
             } catch (Exception ex) {
@@ -59,7 +58,7 @@ public class Conexion extends javax.swing.JFrame {
         Boxbaudios = new javax.swing.JComboBox();
         bt_conect = new javax.swing.JButton();
 
-        setTitle("Conexion");
+        setTitle("Conexion Explo GPS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
@@ -74,6 +73,8 @@ public class Conexion extends javax.swing.JFrame {
         jLabel3.setText("Baudios:");
 
         Boxbaudios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1200", "2400", "4800", "9600", "19200", "38400", "57600", "115200", "460800" }));
+        Boxbaudios.setSelectedIndex(3);
+        Boxbaudios.setToolTipText("");
 
         bt_conect.setText("Conectar");
         bt_conect.addActionListener(new java.awt.event.ActionListener() {
