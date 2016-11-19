@@ -62,6 +62,7 @@ public class Conexion extends javax.swing.JFrame {
         setTitle("Conexion");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         jLabel1.setText("Seleccione el puerto de conexion al GPS");
