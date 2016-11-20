@@ -62,7 +62,7 @@ public class Read_GPS extends Thread{
                     if(aux.charAt(5)=='C')
                     {
                         C.gprmc=aux;
-                        Thread.sleep(5000);
+                        Thread.sleep(1000);
                     }
                     cola.removeLast();
                     cola.addFirst(aux);
