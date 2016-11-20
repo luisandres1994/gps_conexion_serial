@@ -315,12 +315,23 @@ public class VentanaFinal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Codigo Postal:");
 
+        Postal.setEditable(false);
+        Postal.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Elevacion (m):");
+
+        Elevacion.setEditable(false);
+        Elevacion.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Resolución (M):");
 
+        resolucion.setEditable(false);
+        resolucion.setBackground(new java.awt.Color(255, 255, 255));
+
+        DireccionText.setEditable(false);
+        DireccionText.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(DireccionText);
         DireccionText.getAccessibleContext().setAccessibleName("Direccion");
 
@@ -422,14 +433,17 @@ public class VentanaFinal extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        jScrollPane1.getAccessibleContext().setAccessibleName("mapagoogle");
         EscalaSlider.getAccessibleContext().setAccessibleName("EscalaSlider");
         ZoomSlider.getAccessibleContext().setAccessibleName("ZoomSlider");
         ZoomText.getAccessibleContext().setAccessibleName("ZoomText");
         Formato.getAccessibleContext().setAccessibleName("Formato");
         TypeMapa.getAccessibleContext().setAccessibleName("TypeMapa");
+        jScrollPane2.getAccessibleContext().setAccessibleName("direcciones");
         Postal.getAccessibleContext().setAccessibleName("Postal");
         Elevacion.getAccessibleContext().setAccessibleName("Elevacion");
         resolucion.getAccessibleContext().setAccessibleName("resolucion");
+        jScrollPane3.getAccessibleContext().setAccessibleName("Direccion");
 
         jTabbedPane1.addTab("Mapa localizacion", jPanel4);
         jPanel4.getAccessibleContext().setAccessibleName("MapaLocalizacion");

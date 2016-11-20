@@ -111,6 +111,7 @@ public class StatusBar implements MouseListener{
                 case "direcciones":
                     message="Lista de direcciones acortadas de la direccion encontrada";
                     break;
+                
                 default:
                 message="Listo";
             }
