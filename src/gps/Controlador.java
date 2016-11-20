@@ -22,8 +22,6 @@ public class Controlador {
     
     
     
-    
-    
     private SerialPort serial;
     private Home Principal;
     private Conexion con;
@@ -31,27 +29,60 @@ public class Controlador {
     private Read_GPS RG;
     private String data_rmc[];
     public VentanaFinal VF;
-    public Controlador() throws IOException {
+    public boolean modo;
+    private Parameters com;
+    private Com conection;
+    public String puerto,baudios;
+    
+    public Controlador()  {
+        modo=false;
         serial = new SerialPort();
-        gprmc="$GPRMC,194509.000,A,4042.6142,N,07400.4168,W,2.03,221.11,160412,,,A*77";
-        RG = new Read_GPS(this);
-        
-        //VF = new VentanaFinal(this);
-        //VF.setVisible(true);
-        RG.start();
+        gprmc="";
         Principal = new Home(this);
         Principal.setVisible(true);
         
+    }
+    
+    public void iniciarlectura() throws IOException
+    {
+        RG = new Read_GPS(this,modo);
+        RG.start();
     }
     
     public void Matarhilo(){RG.interrupt();}
     
     public void codificar()
     {
-        
         data_rmc = gprmc.split(",");
     }
     
+    
+    public boolean probarconeccion(String p,String b) throws Exception
+    {
+        puerto=p;
+        baudios=b;
+        boolean exito=false;
+        int seg=0;
+        com = new Parameters();
+        com.setPort(puerto);
+        com.setBaudRate(Baud.valueOf(baudios));
+        conection= new Com(com);
+        String line="";
+        String x;
+        while(seg<5)
+        {
+            x= conection.receiveSingleString();
+            if("C".equals(x))
+            {
+                exito=true;
+                break;
+            }
+            Thread.sleep(1000);
+            seg++;                    
+        }
+        conection.close();
+        return exito;
+    }
     
     
     public List <String> get_puertos() throws Exception

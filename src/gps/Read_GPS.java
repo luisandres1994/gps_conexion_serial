@@ -5,6 +5,9 @@
  */
 package gps;
 
+import giovynet.serial.Baud;
+import giovynet.serial.Com;
+import giovynet.serial.Parameters;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,44 +28,78 @@ public class Read_GPS extends Thread{
     private FileReader f;
     private BufferedReader b;
     private LinkedList cola;
+    private boolean modo;
     
-    
-    public Read_GPS(Controlador ct) throws FileNotFoundException, IOException {
+    public Read_GPS(Controlador ct, boolean m) throws FileNotFoundException, IOException {
         C=ct;
-        F= new File("log.txt");
-        f = new FileReader(F);
-        String cadena;
-        cola = new LinkedList();
-        BufferedReader b = new BufferedReader(f);
-         while((cadena = b.readLine())!=null) {
-          cola.addFirst(cadena);
-      }
-      b.close();
-      f.close();
+        modo=m;
+        
     }
-    
+
     public void run()
     {
         String aux;
         try{
             
-            while(!cola.isEmpty())
+            if(modo==false)
             {
-                
-                
-                aux=(String) cola.peekLast();
-                if(aux.charAt(5)=='C')
-                {
-                    C.gprmc=aux;
-                    Thread.sleep(5000);
+                F= new File("log.txt");
+                f = new FileReader(F);
+                String cadena;
+                cola = new LinkedList();
+                BufferedReader b = new BufferedReader(f);
+                 while((cadena = b.readLine())!=null) {
+                  cola.addFirst(cadena);
                 }
-                cola.removeLast();
-                cola.addFirst(aux);
-            }
+                b.close();
+                f.close();
+                
+                while(!cola.isEmpty())
+                {
+
+
+                    aux=(String) cola.peekLast();
+                    if(aux.charAt(5)=='C')
+                    {
+                        C.gprmc=aux;
+                        Thread.sleep(5000);
+                    }
+                    cola.removeLast();
+                    cola.addFirst(aux);
+                }
+            }else
+            {
+             
+                Parameters com1 = new Parameters();
+                com1.setPort(C.puerto);
+                com1.setBaudRate(Baud.valueOf(C.baudios));
+                Com conection = new Com(com1);
+                boolean gp;
+                gp=false;
+                String line,x;
+                line="";
+                while(true)
+                {
+                    x= conection.receiveSingleString();
+                    if(!"\n".equals(x))
+                    {
+                        line+=x;
+                        if("C".equals(x)) gp=true;
+                    }else
+                    {
+                        if(gp) 
+                        {
+                            C.gprmc=line;
+                            gp=false;
+                        }
+
+                        line="";
+                    }
             
-        } catch (Exception ex) {
-            Logger.getLogger(Read_GPS.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                }
+                
+            }
+        } catch (Exception ex) {}
         
     }
     
