@@ -62,7 +62,6 @@ public class Read_GPS extends Thread{
                     if(aux.charAt(5)=='C')
                     {
                         C.gprmc=aux;
-                        System.out.println(C.gprmc);
                         //Thread.sleep(5000);
                     }else if(aux.charAt(4)=='G'){
                         C.gpgga=aux;
