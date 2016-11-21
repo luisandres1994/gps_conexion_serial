@@ -170,7 +170,7 @@ public class Conexion extends javax.swing.JFrame {
         baudios+=(String)Boxbaudios.getSelectedItem();
         String puerto = (String)Boxpuertos.getSelectedItem();
         try {
-            exito = C.probarconexion(puerto, baudios);
+            exito = C.probarconeccion(puerto, baudios);
         } catch (Exception ex) {}
         
  
@@ -195,10 +195,10 @@ public class Conexion extends javax.swing.JFrame {
 
     private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
         // TODO add your handling code here:
+            C.VF = new VentanaFinal(this.C);
             try {
                 C.iniciarlectura();
             } catch (IOException ex) {}
-            C.VF = new VentanaFinal(this.C);
             h.setVisible(false);
             this.setVisible(false);
             //it.setVisible(true);

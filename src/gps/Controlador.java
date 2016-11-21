@@ -25,12 +25,9 @@ public class Controlador {
     private SerialPort serial;
     private Home Principal;
     private Conexion con;
-    public String gprmc,gpgga,gpgsv,gpgsa;
+    public String gprmc;
     private Read_GPS RG;
     private String data_rmc[];
-    private String data_gga[];
-    private String data_gsv[];
-    private String data_gsa[];
     public VentanaFinal VF;
     public boolean modo;
     private Parameters com;
@@ -41,8 +38,6 @@ public class Controlador {
         modo=false;
         serial = new SerialPort();
         gprmc="";
-        gpgga="";
-        gpgsv="";
         Principal = new Home(this);
         Principal.setVisible(true);
         
@@ -59,28 +54,10 @@ public class Controlador {
     public void codificar()
     {
         data_rmc = gprmc.split(",");
-        data_gga = gpgga.split(",");
-        data_gsv = gpgsv.split(",");
-        data_gsa = gpgsa.split(",");
     }
     
-    public String[] getDataGGA(){
-        return data_gga;
-    }
     
-    public String[] getDataGSA(){
-        return data_gsa;
-    }
-    
-    public String[] getDataGSV(){
-        return data_gsv;
-    }
-    
-    public String[] getDataRMC(){
-        return data_rmc;
-    }
-    
-    public boolean probarconexion(String p,String b) throws Exception
+    public boolean probarconeccion(String p,String b) throws Exception
     {
         puerto=p;
         baudios=b;
@@ -156,5 +133,11 @@ public class Controlador {
         }
         return longitud;
     }
+    
+    
+    
+    
+    
+    
     
 }

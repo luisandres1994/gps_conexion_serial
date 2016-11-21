@@ -6,7 +6,6 @@
 package gps;
 
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -50,9 +49,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         Map= new StaticMaps();
         initComponents();
         capturareventos();
-        InformacionGeneral();
         this.setVisible(true);
-        jPanel2.setBackground(Color.BLACK);
         
     }
     
@@ -70,36 +67,6 @@ public class VentanaFinal extends javax.swing.JFrame {
         for(int i=0; i<componentes.length;i++){ 
             componentes[i].addMouseListener(bar);
         }
-    }
-    
-    private void InformacionGeneral(){
-        C.codificar();
-        String[] dataGGA=C.getDataGGA();
-        String[] dataGSA=C.getDataGSA();
-        String[] dataRMC=C.getDataRMC();
-        if("A".equals(dataRMC[2]))
-            DatosValidos.setText("Datos válidos");
-        else
-            DatosValidos.setText("Datos invalidos");
-        Fecha.setText(dataRMC[9]);
-        Hora.setText(dataRMC[1]);
-        CalidadGPS.setText(dataGGA[6]);
-        Latitud.setText(dataRMC[3]);
-        if(dataRMC[4]=="N")
-            NoS.setText("Norte");
-        else
-           NoS.setText("Sur");
-        Longitud.setText(dataRMC[5]);
-        if(dataRMC[6]=="E")
-           EoO.setText("Este");
-        else
-           EoO.setText("Oeste");
-        Altitud.setText(dataGGA[9]);
-        HOPD.setText(dataGGA[8]);
-        Velocidad.setText(dataRMC[7]);
-        Rumbo.setText(dataRMC[8]);
-        VariacionMagnetica.setText(dataRMC[10]);
-        NroSatelites.setText(dataGGA[7]);
     }
     
     private StaticMaps.Format seleccionarFormato(){
@@ -207,23 +174,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        DatosValidos = new javax.swing.JTextField();
-        CalidadGPS = new javax.swing.JTextField();
-        Fecha = new javax.swing.JTextField();
-        Hora = new javax.swing.JTextField();
-        Latitud = new javax.swing.JTextField();
-        Longitud = new javax.swing.JTextField();
-        Altitud = new javax.swing.JTextField();
-        HOPD = new javax.swing.JTextField();
-        Velocidad = new javax.swing.JTextField();
-        VariacionMagnetica = new javax.swing.JTextField();
-        NroSatelites = new javax.swing.JTextField();
-        Rumbo = new javax.swing.JTextField();
-        EoO = new javax.swing.JTextField();
-        NoS = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        NroSatelitesVistos = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Mapa_Google = new javax.swing.JLabel();
@@ -264,143 +215,30 @@ public class VentanaFinal extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        CalidadGPS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CalidadGPSActionPerformed(evt);
-            }
-        });
-
-        Latitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LatitudActionPerformed(evt);
-            }
-        });
-
-        Velocidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VelocidadActionPerformed(evt);
-            }
-        });
-
-        VariacionMagnetica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VariacionMagneticaActionPerformed(evt);
-            }
-        });
-
-        NroSatelites.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NroSatelitesActionPerformed(evt);
-            }
-        });
-
-        Rumbo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RumboActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGap(0, 791, Short.MAX_VALUE)
-=======
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(DatosValidos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
-                        .addComponent(CalidadGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(Velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(Rumbo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(VariacionMagnetica, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(NroSatelites, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Hora, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(Latitud, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NoS, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EoO, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(Altitud, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(HOPD, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
->>>>>>> refs/remotes/origin/Shaira
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DatosValidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CalidadGPS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(104, 104, 104)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Latitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Longitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Altitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(HOPD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EoO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NoS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(119, 119, 119)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Velocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Rumbo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(VariacionMagnetica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NroSatelites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Informacion general", jPanel2);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTextField1.setText("Numero de satelites visibles");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGap(0, 791, Short.MAX_VALUE)
-=======
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(495, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(NroSatelitesVistos, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)))
-                .addGap(153, 153, 153))
->>>>>>> refs/remotes/origin/Shaira
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(NroSatelitesVistos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(471, Short.MAX_VALUE))
+            .addGap(0, 530, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Satelites", jPanel3);
@@ -679,60 +517,20 @@ public class VentanaFinal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_MapaRecargarActionPerformed
 
-    private void CalidadGPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalidadGPSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CalidadGPSActionPerformed
-
-    private void LatitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LatitudActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_LatitudActionPerformed
-
-    private void VelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VelocidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_VelocidadActionPerformed
-
-    private void VariacionMagneticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VariacionMagneticaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_VariacionMagneticaActionPerformed
-
-    private void NroSatelitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NroSatelitesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NroSatelitesActionPerformed
-
-    private void RumboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RumboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_RumboActionPerformed
-
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Altitud;
-    private javax.swing.JTextField CalidadGPS;
-    private javax.swing.JTextField DatosValidos;
     private javax.swing.JTextField DireccionText;
     private javax.swing.JList Direcciones;
     private javax.swing.JTextField Elevacion;
-    private javax.swing.JTextField EoO;
     private javax.swing.JSlider EscalaSlider;
     private javax.swing.JTextField EscalaText;
-    private javax.swing.JTextField Fecha;
     private javax.swing.JComboBox Formato;
-    private javax.swing.JTextField HOPD;
-    private javax.swing.JTextField Hora;
     private javax.swing.JLabel Jlabel2;
-    private javax.swing.JTextField Latitud;
-    private javax.swing.JTextField Longitud;
     private javax.swing.JButton MapaRecargar;
     private javax.swing.JLabel Mapa_Google;
-    private javax.swing.JTextField NoS;
-    private javax.swing.JTextField NroSatelites;
-    private javax.swing.JTextField NroSatelitesVistos;
     private javax.swing.JTextField Postal;
-    private javax.swing.JTextField Rumbo;
     private javax.swing.JComboBox TypeMapa;
-    private javax.swing.JTextField VariacionMagnetica;
-    private javax.swing.JTextField Velocidad;
     private javax.swing.JSlider ZoomSlider;
     private javax.swing.JTextField ZoomText;
     private javax.swing.JLabel jLabel1;
@@ -751,7 +549,6 @@ public class VentanaFinal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField resolucion;
     // End of variables declaration//GEN-END:variables
 }
