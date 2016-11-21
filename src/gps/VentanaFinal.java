@@ -11,8 +11,11 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import maps.java.*;
@@ -34,6 +37,9 @@ public class VentanaFinal extends javax.swing.JFrame {
     private Controlador C;
     private int escala,zoom;
     private StatusBar bar;
+    
+    private Geocoding direcciones;
+    private Elevation elevacion;
     
     public VentanaFinal(Controlador Ct) {
         C=Ct;
@@ -138,19 +144,55 @@ public class VentanaFinal extends javax.swing.JFrame {
     
     public void cargarmapa()
     {
+      try {
+            C.codificar();
+            String latitud =C.get_latitud();
+            String longitud =C.get_longitud();
+            imagen= Map.getStaticMap(latitud+","+longitud, zoom, new Dimension (600,600),escala,
+                    this.seleccionarFormato(), this.seleccionarTipoMapa());
+
+            Mapa_Google.setText(null);
+            ImageIcon imgIcon=new ImageIcon(imagen);
+            Icon iconImage=(Icon)imgIcon;
+            Mapa_Google.setText(null);
+            Mapa_Google.setIcon(iconImage);
+            cargardirecciones(latitud,longitud);
+            cargarelevacion(latitud,longitud);
         
-        try {
-        C.codificar();
-        imagen= Map.getStaticMap(C.get_latitud()+","+C.get_longitud(), zoom, new Dimension (600,600),escala,
-                this.seleccionarFormato(), this.seleccionarTipoMapa());
-        
-        }catch(Exception e){}
-        Mapa_Google.setText(null);
-        ImageIcon imgIcon=new ImageIcon(imagen);
-        Icon iconImage=(Icon)imgIcon;
-        Mapa_Google.setText(null);
-        Mapa_Google.setIcon(iconImage);
+        }catch(MalformedURLException | UnsupportedEncodingException e){}
     }
+    public void cargarelevacion(String latitud, String longitud)
+    {
+        try {
+            elevacion = new Elevation();
+            double resultado = elevacion.getElevation(Double.valueOf(latitud), Double.valueOf(longitud));
+            Elevacion.setText(String.valueOf(resultado));
+            resolucion.setText(String.valueOf(elevacion.getResolution()));
+        }catch(MalformedURLException e){}
+    }
+    
+    public void cargardirecciones(String latitud,String longitud)
+    {
+        try {
+            direcciones = new Geocoding();
+            ArrayList <String> resultado = direcciones.getAddress(Double.valueOf(latitud), Double.valueOf(longitud));
+            if(resultado.size()>0)
+            {
+                DireccionText.setText("");
+                DireccionText.setText(resultado.get(0));
+                Postal.setText(direcciones.getPostalcode());
+                DefaultListModel listModel = new DefaultListModel();
+                for(int i=0; i<resultado.size(); i++) 
+                {
+                    listModel.add(i, resultado.get(i));
+                }
+                Direcciones.setModel(listModel);
+        }
+        }catch(MalformedURLException | UnsupportedEncodingException e){}
+        
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
