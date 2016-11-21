@@ -13,6 +13,7 @@ import java.util.List;
 
 
 
+
 /**
  *
  * @author Andres
@@ -24,57 +25,11 @@ public class Gps {
      * 
      */
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         // TODO code application logic here
-        SerialPort serial= new SerialPort();
-        Interfaz it;
-        Home h;
+        
         Controlador Control=new Controlador();
-        //VentanaFinal V;
-        //V = new VentanaFinal();
-        //h=new Home();
-        //h.setVisible(true);
         
-        //it=new Interfaz();
-        //it.setVisible(true);
-        /*
-        List <String> portsfree = serial.getFreeSerialPort();
-        for(String free: portsfree)
-        {
-            System.out.println(free);
-        }
-        
-        Parameters com1 = new Parameters();
-        com1.setPort("COM5");
-        com1.setBaudRate(Baud.valueOf("_9600"));
-        Com conection = new Com(com1);
-        boolean gp;
-        gp=false;
-        String line,x;
-        line="";
-        while(true)
-        {
-            x= conection.receiveSingleString();
-           if(!"\n".equals(x))
-            {
-                line+=x;
-                if("C".equals(x)) gp=true;
-            }else
-            {
-                
-                if(gp) 
-                {
-                    gprmc=line;
-                    gp=false;
-                }
-               // System.out.println(line);
-                
-                line="";
-            }
-            
-        }
-        
-        */
         
         
     }

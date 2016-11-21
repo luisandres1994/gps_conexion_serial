@@ -5,10 +5,16 @@
  */
 package gps;
 
+import giovynet.serial.Baud;
+import giovynet.serial.Com;
+import giovynet.serial.Parameters;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +29,8 @@ public class Conexion extends javax.swing.JFrame {
         Interfaz it;
         Controlador C;
         Home h;
+        private boolean exito;
+        
     public Conexion(Controlador ct,Home H) {
             try {
                 C= ct;
@@ -33,7 +41,6 @@ public class Conexion extends javax.swing.JFrame {
                 for(String free: puertos)
                 {
                     lista.addElement(free);
-                    System.out.println(free);
                 }
                 Boxpuertos.setModel(lista);
             } catch (Exception ex) {
@@ -58,8 +65,10 @@ public class Conexion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         Boxbaudios = new javax.swing.JComboBox();
         bt_conect = new javax.swing.JButton();
+        aviso = new javax.swing.JLabel();
+        prueba = new javax.swing.JButton();
 
-        setTitle("Conexion");
+        setTitle("Conexion Explo GPS");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         setType(java.awt.Window.Type.UTILITY);
@@ -74,6 +83,8 @@ public class Conexion extends javax.swing.JFrame {
         jLabel3.setText("Baudios:");
 
         Boxbaudios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1200", "2400", "4800", "9600", "19200", "38400", "57600", "115200", "460800" }));
+        Boxbaudios.setSelectedIndex(3);
+        Boxbaudios.setToolTipText("");
 
         bt_conect.setText("Conectar");
         bt_conect.addActionListener(new java.awt.event.ActionListener() {
@@ -82,20 +93,21 @@ public class Conexion extends javax.swing.JFrame {
             }
         });
 
+        aviso.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        aviso.setText("Se esperaran 5 seg por conexion");
+        aviso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        prueba.setText("modo prueba");
+        prueba.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pruebaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Boxpuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Boxbaudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -103,8 +115,26 @@ public class Conexion extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(148, 148, 148)
-                        .addComponent(bt_conect, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bt_conect, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(prueba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Boxpuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(aviso)
+                        .addGap(0, 11, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(Boxbaudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,22 +147,63 @@ public class Conexion extends javax.swing.JFrame {
                     .addComponent(Boxpuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(Boxbaudios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(aviso, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_conect, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addGap(10, 10, 10)
+                .addComponent(prueba)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+ 
+    
     private void bt_conectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_conectActionPerformed
-        // TODO add your handling code here:
-        it= new Interfaz(C);
-        h.setVisible(false);
-        this.setVisible(false);
-        it.setVisible(true);
+        //it= new Interfaz(C);
+        
+        
+        exito=false;
+        String baudios="_";
+        baudios+=(String)Boxbaudios.getSelectedItem();
+        String puerto = (String)Boxpuertos.getSelectedItem();
+        try {
+            exito = C.probarconeccion(puerto, baudios);
+        } catch (Exception ex) {}
+        
+ 
+        if(exito)
+        {
+            C.VF = new VentanaFinal(this.C);
+            try {
+                C.iniciarlectura();
+            } catch (IOException ex) {}
+            h.setVisible(false);
+            this.setVisible(false);
+            //it.setVisible(true);
+            C.VF.setVisible(true);
+        }else
+        {
+             String nl = System.getProperty("line.separator");
+            JOptionPane.showMessageDialog(null, "No se recibe data"
+                    + nl + "Verifique que el GPS este en el puerto seleccionado"
+                    + nl + "y verifique si los Baudios corresponden");
+        }
     }//GEN-LAST:event_bt_conectActionPerformed
+
+    private void pruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pruebaActionPerformed
+        // TODO add your handling code here:
+            C.VF = new VentanaFinal(this.C);
+            try {
+                C.iniciarlectura();
+            } catch (IOException ex) {}
+            h.setVisible(false);
+            this.setVisible(false);
+            //it.setVisible(true);
+            C.VF.setVisible(true);
+    }//GEN-LAST:event_pruebaActionPerformed
 
     
   
@@ -140,9 +211,11 @@ public class Conexion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox Boxbaudios;
     private javax.swing.JComboBox Boxpuertos;
+    private javax.swing.JLabel aviso;
     private javax.swing.JButton bt_conect;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton prueba;
     // End of variables declaration//GEN-END:variables
 }

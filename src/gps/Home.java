@@ -46,6 +46,7 @@ public class Home extends javax.swing.JFrame {
         Iniciar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Explo GPS");
         setMaximumSize(new java.awt.Dimension(600, 600));
         setMinimumSize(new java.awt.Dimension(600, 600));
         setName("Int_home"); // NOI18N
