@@ -72,7 +72,7 @@ public class Controlador {
         while(seg<5)
         {
             x= conection.receiveSingleString();
-            if("C".equals(x))
+            if(!"".equals(x))
             {
                 exito=true;
                 break;
