@@ -15,6 +15,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -34,12 +36,11 @@ public class VentanaFinal extends javax.swing.JFrame {
     
     private Image imagen;
     private StaticMaps Map;
+    private Geocoding direcciones;
+    private Elevation elevacion;
     private Controlador C;
     private int escala,zoom;
     private StatusBar bar;
-    
-    private Geocoding direcciones;
-    private Elevation elevacion;
     
     public VentanaFinal(Controlador Ct) {
         C=Ct;
