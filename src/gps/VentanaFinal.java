@@ -237,7 +237,6 @@ public class VentanaFinal extends javax.swing.JFrame {
         TypeMapa = new javax.swing.JComboBox();
         MapaRecargar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        DireccionText = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         Direcciones = new javax.swing.JList();
         jLabel5 = new javax.swing.JLabel();
@@ -246,6 +245,8 @@ public class VentanaFinal extends javax.swing.JFrame {
         Elevacion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         resolucion = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        DireccionText = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -464,11 +465,22 @@ public class VentanaFinal extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Codigo Postal:");
 
+        Postal.setEditable(false);
+
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("Elevacion (m):");
 
+        Elevacion.setEditable(false);
+
         jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel7.setText("Resolución (M):");
+
+        resolucion.setEditable(false);
+
+        DireccionText.setEditable(false);
+        DireccionText.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setViewportView(DireccionText);
+        DireccionText.getAccessibleContext().setAccessibleName("Direccion");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -491,9 +503,8 @@ public class VentanaFinal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DireccionText)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -512,11 +523,12 @@ public class VentanaFinal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(TypeMapa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Formato, 0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(Formato, 0, 0, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane3)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(MapaRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +547,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                             .addComponent(Elevacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
                             .addComponent(resolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 9, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -562,9 +574,9 @@ public class VentanaFinal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DireccionText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -574,10 +586,11 @@ public class VentanaFinal extends javax.swing.JFrame {
         ZoomText.getAccessibleContext().setAccessibleName("ZoomText");
         Formato.getAccessibleContext().setAccessibleName("Formato");
         TypeMapa.getAccessibleContext().setAccessibleName("TypeMapa");
-        DireccionText.getAccessibleContext().setAccessibleName("Direccion");
+        jScrollPane2.getAccessibleContext().setAccessibleName("direcciones");
         Postal.getAccessibleContext().setAccessibleName("Postal");
         Elevacion.getAccessibleContext().setAccessibleName("Elevacion");
         resolucion.getAccessibleContext().setAccessibleName("resolucion");
+        jScrollPane3.getAccessibleContext().setAccessibleName("Direccion");
 
         jTabbedPane1.addTab("Mapa localizacion", jPanel4);
         jPanel4.getAccessibleContext().setAccessibleName("MapaLocalizacion");
@@ -719,6 +732,7 @@ public class VentanaFinal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField resolucion;
