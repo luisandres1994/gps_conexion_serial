@@ -41,7 +41,6 @@ public class VentanaFinal extends javax.swing.JFrame {
     private Controlador C;
     private int escala,zoom;
     private StatusBar bar;
-    
     public VentanaFinal(Controlador Ct) {
         C=Ct;
         imagen=null;
@@ -52,7 +51,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         capturareventos();
         InformacionGeneral();
         this.setVisible(true);
-        jPanel2.setBackground(Color.BLACK);
+        //jPanel2.setBackground(Color.BLACK);
         
     }
     
@@ -72,7 +71,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         }
     }
     
-    private void InformacionGeneral(){
+    public void InformacionGeneral(){
         C.codificar();
         String[] dataGGA=C.getDataGGA();
         String[] dataGSA=C.getDataGSA();

@@ -72,6 +72,7 @@ public class Read_GPS extends Thread{
                     }else if(aux.charAt(4)=='S'&&aux.charAt(5)=='A'){
                         C.gpgsa=aux;
                     }
+                    
                     cola.removeLast();
                     cola.addFirst(aux);
                 }
