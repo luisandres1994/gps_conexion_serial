@@ -49,12 +49,11 @@ public class VentanaFinal extends javax.swing.JFrame {
         Map= new StaticMaps();
         initComponents();
         capturareventos();
-        InformacionGeneral();
+        //InformacionGeneral();
         this.setVisible(true);
-<<<<<<< HEAD
+
         //jPanel2.setBackground(Color.BLACK);
-=======
->>>>>>> refs/remotes/origin/Shaira
+
         
     }
     
@@ -74,13 +73,10 @@ public class VentanaFinal extends javax.swing.JFrame {
         }
     }
     
-<<<<<<< HEAD
+
     public void InformacionGeneral(){
-        C.codificar();
-=======
-    private void InformacionGeneral(){
+        
         C.codificar();      
->>>>>>> refs/remotes/origin/Shaira
         String[] dataGGA=C.getDataGGA();
         String[] dataGSA=C.getDataGSA();
         String[] dataRMC=C.getDataRMC();
@@ -153,7 +149,7 @@ public class VentanaFinal extends javax.swing.JFrame {
     public void cargarmapa()
     {
       try {
-            C.codificar();
+            //C.codificar();
             String latitud =C.get_latitud();
             String longitud =C.get_longitud();
             imagen= Map.getStaticMap(latitud+","+longitud, zoom, new Dimension (600,600),escala,
@@ -353,7 +349,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(40, 40, 40)
                         .addComponent(DatosValidos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -410,7 +406,7 @@ public class VentanaFinal extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(495, Short.MAX_VALUE)
+                .addContainerGap(475, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -542,7 +538,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -566,7 +562,7 @@ public class VentanaFinal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(MapaRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,7 +636,10 @@ public class VentanaFinal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
