@@ -101,6 +101,7 @@ public class Controlador {
             x= conection.receiveSingleString();
             if(!"".equals(x))
             {
+                
                 if(x.equals("C")){
                 exito=2;
                 break;}
