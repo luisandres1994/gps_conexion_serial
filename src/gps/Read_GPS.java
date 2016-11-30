@@ -45,7 +45,7 @@ public class Read_GPS extends Thread{
             
             if(modo==false)
             {
-                rmc=gga=gsv=gsa=false;
+                
                 F= new File("log.txt");
                 f = new FileReader(F);
                 String cadena;
@@ -56,14 +56,19 @@ public class Read_GPS extends Thread{
                 }
                 b.close();
                 f.close();
-                //Thread.sleep(5000);
+                Thread.sleep(4000);
+                rmc=gga=gsv=gsa=false;
+                String validador [];
+                
                 while(!cola.isEmpty())
                 {
                     aux=(String) cola.peekLast();
                     if(aux.charAt(5)=='C')
                     {
                         C.gprmc=aux;
-                        rmc=true;
+                        validador= aux.split(",");
+                        if(validador[2].equals("A")) rmc = true;
+                        
                     }else if(aux.charAt(4)=='G'){
                         C.gpgga=aux;
                         gga=true;
@@ -76,13 +81,11 @@ public class Read_GPS extends Thread{
                     }
                     
                     
-                    /*if(rmc && gga && gsv && gsa){
-                        System.out.println("Entro ");
-                        VF.InformacionGeneral();
-                        VF.InformacionSatelites();
+                    if(rmc && gga && gsv && gsa){
+                        C.VF.InformacionGeneral();
                         rmc=gga=gsv=gsa=false;
                         Thread.sleep(1000);
-                    }*/
+                    }
                     cola.removeLast();
                     cola.addFirst(aux);
                 }
@@ -99,6 +102,8 @@ public class Read_GPS extends Thread{
                 line="";
                 String validador [];
                 rmc=gga=gsv=gsa=false;
+                Thread.sleep(4000);
+                C.VF.dataconexion();
                 while(true)
                 {
                     x= conection.receiveSingleString();
@@ -113,7 +118,6 @@ public class Read_GPS extends Thread{
                                 C.gprmc=line;
                                 validador= line.split(",");
                                 if(validador[2].equals("A")) rmc = true;
-                                //Thread.sleep(5000);
                             }else if(line.charAt(4)=='G'){
                                 C.gpgga=line;
                                 gga=true;
@@ -129,9 +133,8 @@ public class Read_GPS extends Thread{
                         line="";
                         if(rmc && gga && gsv && gsa){
                             C.VF.InformacionGeneral();
-                            VF.InformacionSatelites();
                             rmc=gga=gsv=gsa=false;
-                            Thread.sleep(100);
+                            Thread.sleep(1000);
                         }
                     }
             
