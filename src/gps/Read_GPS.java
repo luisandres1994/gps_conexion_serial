@@ -70,7 +70,6 @@ public class Read_GPS extends Thread{
                     }else if(aux.charAt(5)=='V'){
                         C.gpgsv=aux;
                         gsv=true;
-                        System.out.println(C.gpgsv);
                     }else if(aux.charAt(4)=='S'&&aux.charAt(5)=='A'){
                         C.gpgsa=aux;
                         gsa=true;
