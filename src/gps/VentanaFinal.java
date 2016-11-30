@@ -50,8 +50,8 @@ public class VentanaFinal extends javax.swing.JFrame {
         initComponents();
         capturareventos();
         this.setVisible(true);
-        InformacionSatelites();
-        
+        //InformacionSatelites();
+        //InformacionGeneral();
     }
     
     private void capturareventos()
