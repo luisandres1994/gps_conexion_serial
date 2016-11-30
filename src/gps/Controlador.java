@@ -22,7 +22,7 @@ public class Controlador {
     
     
     
-     private SerialPort serial;
+    private SerialPort serial;
     private Home Principal;
     private Conexion con;
     public String gprmc,gpgga,gpgsv,gpgsa;
@@ -38,7 +38,7 @@ public class Controlador {
     public String puerto,baudios;
     public boolean start;
     public Controlador()  {
-     modo=false;
+        modo=false;
         serial = new SerialPort();
         gprmc="";
         gpgga="";
@@ -126,6 +126,7 @@ public class Controlador {
     
     public String get_latitud()
     {
+        codificar();
         String aux = data_rmc[3];
         String latitud = "";
         if("S".equals(data_rmc[4]))
