@@ -102,7 +102,6 @@ public class VentanaFinal extends javax.swing.JFrame {
             DatosValidos.setText("Datos válidos");
         else
             DatosValidos.setText("Datos invalidos");
-        
         Fecha.setText(dataRMC[9]);
         Hora.setText(dataRMC[1]);
         CalidadGPS.setText(dataGGA[6]);
