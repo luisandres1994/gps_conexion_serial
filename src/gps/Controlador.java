@@ -22,7 +22,7 @@ public class Controlador {
     
     
     
-     private SerialPort serial;
+    private SerialPort serial;
     private Home Principal;
     private Conexion con;
     public String gprmc,gpgga,gpgsv,gpgsa;
@@ -36,15 +36,17 @@ public class Controlador {
     private Parameters com;
     private Com conection;
     public String puerto,baudios;
-    
+    public boolean start;
     public Controlador()  {
-     modo=false;
+        modo=false;
         serial = new SerialPort();
         gprmc="";
         gpgga="";
         gpgsv="";
         Principal = new Home(this);
         Principal.setVisible(true);
+        start = false;
+        
     }
     
     public void iniciarlectura() throws IOException
@@ -81,11 +83,11 @@ public class Controlador {
     
     
     
-    public boolean probarconexion(String p,String b) throws Exception
+    public int probarconexion(String p,String b) throws Exception
     {
         puerto=p;
         baudios=b;
-        boolean exito=false;
+        int exito=0;
         int seg=0;
         com = new Parameters();
         com.setPort(puerto);
@@ -93,16 +95,23 @@ public class Controlador {
         conection= new Com(com);
         String line="";
         String x;
+        int seg2=100000000;
         while(seg<5)
         {
             x= conection.receiveSingleString();
             if(!"".equals(x))
             {
-                exito=true;
-                break;
-            }
+                
+                if(x.equals("C")){
+                exito=2;
+                break;}
+                exito=1;
+                seg2++;
+                if(seg2>500000000) break;
+            }else{
+                seg2+=seg2;
             Thread.sleep(1000);
-            seg++;                    
+            seg++;}                    
         }
         conection.close();
         return exito;
@@ -117,6 +126,7 @@ public class Controlador {
     
     public String get_latitud()
     {
+        codificar();
         String aux = data_rmc[3];
         String latitud = "";
         if("S".equals(data_rmc[4]))

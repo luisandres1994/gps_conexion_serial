@@ -29,7 +29,7 @@ public class Conexion extends javax.swing.JFrame {
         Interfaz it;
         Controlador C;
         Home h;
-        private boolean exito;
+        private int exito;
         
     public Conexion(Controlador ct,Home H) {
             try {
@@ -165,7 +165,7 @@ public class Conexion extends javax.swing.JFrame {
         //it= new Interfaz(C);
         
         
-        exito=false;
+        exito=0;
         String baudios="_";
         baudios+=(String)Boxbaudios.getSelectedItem();
         String puerto = (String)Boxpuertos.getSelectedItem();
@@ -174,22 +174,30 @@ public class Conexion extends javax.swing.JFrame {
         } catch (Exception ex) {}
         
  
-        if(exito)
+        if(exito==2)
         {
-            C.VF = new VentanaFinal(this.C);
+            C.modo=true;
             try {
                 C.iniciarlectura();
             } catch (IOException ex) {}
+            C.VF = new VentanaFinal(this.C);
             h.setVisible(false);
             this.setVisible(false);
             //it.setVisible(true);
             C.VF.setVisible(true);
         }else
         {
-             String nl = System.getProperty("line.separator");
-            JOptionPane.showMessageDialog(null, "No se recibe data"
-                    + nl + "Verifique que el GPS este en el puerto seleccionado"
-                    + nl + "y verifique si los Baudios corresponden");
+            if(exito==0){
+                String nl = System.getProperty("line.separator");
+                JOptionPane.showMessageDialog(null, "No se recibe data"
+                        + nl + "Verifique que el GPS este en el puerto seleccionado"
+                        + nl + "y verifique si los Baudios corresponden");
+            }else if(exito ==1){
+                String nl = System.getProperty("line.separator");
+                JOptionPane.showMessageDialog(null, "Data incorrecta"
+                        + nl + "Verifique que la velocidad del GPS (Baudios)"
+                        + nl + "sea la correcta o que el gps este conectado a un satelite");
+            }
         }
     }//GEN-LAST:event_bt_conectActionPerformed
 

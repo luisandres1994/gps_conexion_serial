@@ -24,6 +24,7 @@ import java.util.LinkedList;
 public class Read_GPS extends Thread{
     
     private Controlador C;
+    private VentanaFinal VF;
     private File F;
     private FileReader f;
     private BufferedReader b;
@@ -39,10 +40,12 @@ public class Read_GPS extends Thread{
     public void run()
     {
         String aux;
+        boolean rmc,gga,gsv,gsa;
         try{
             
             if(modo==false)
             {
+                
                 F= new File("log.txt");
                 f = new FileReader(F);
                 String cadena;
@@ -53,24 +56,35 @@ public class Read_GPS extends Thread{
                 }
                 b.close();
                 f.close();
+                Thread.sleep(4000);
+                rmc=gga=gsv=gsa=false;
+                String validador [];
                 
                 while(!cola.isEmpty())
                 {
-
-
                     aux=(String) cola.peekLast();
                     if(aux.charAt(5)=='C')
                     {
                         C.gprmc=aux;
-                        //Thread.sleep(5000);
+                        validador= aux.split(",");
+                        if(validador[2].equals("A")) rmc = true;
+                        
                     }else if(aux.charAt(4)=='G'){
                         C.gpgga=aux;
-                        
+                        gga=true;
                     }else if(aux.charAt(5)=='V'){
                         C.gpgsv=aux;
-                        
+                        gsv=true;
                     }else if(aux.charAt(4)=='S'&&aux.charAt(5)=='A'){
                         C.gpgsa=aux;
+                        gsa=true;
+                    }
+                    
+                    
+                    if(rmc && gga && gsv && gsa){
+                        C.VF.InformacionGeneral();
+                        rmc=gga=gsv=gsa=false;
+                        Thread.sleep(1000);
                     }
                     cola.removeLast();
                     cola.addFirst(aux);
@@ -86,6 +100,10 @@ public class Read_GPS extends Thread{
                 gp=false;
                 String line,x;
                 line="";
+                String validador [];
+                rmc=gga=gsv=gsa=false;
+                Thread.sleep(4000);
+                C.VF.dataconexion();
                 while(true)
                 {
                     x= conection.receiveSingleString();
@@ -95,13 +113,29 @@ public class Read_GPS extends Thread{
                         if("C".equals(x)) gp=true;
                     }else
                     {
-                        if(gp) 
-                        {
-                            C.gprmc=line;
-                            gp=false;
-                        }
+                         if(line.charAt(5)=='C')
+                            {
+                                C.gprmc=line;
+                                validador= line.split(",");
+                                if(validador[2].equals("A")) rmc = true;
+                            }else if(line.charAt(4)=='G'){
+                                C.gpgga=line;
+                                gga=true;
 
+                            }else if(line.charAt(5)=='V'){
+                                C.gpgsv=line;
+                                gsv=true;
+
+                            }else if(line.charAt(4)=='S'&&line.charAt(5)=='A'){
+                                C.gpgsa=line;
+                                gsa=true;
+                            }
                         line="";
+                        if(rmc && gga && gsv && gsa){
+                            C.VF.InformacionGeneral();
+                            rmc=gga=gsv=gsa=false;
+                            Thread.sleep(1000);
+                        }
                     }
             
                 }
